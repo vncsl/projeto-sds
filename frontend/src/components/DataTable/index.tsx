@@ -1,4 +1,26 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { SalePage } from "types/sale";
+import { formatLocalDate } from "utils/formats";
+import { BASE_URL } from "utils/requests";
+
 const DataTable = () => {
+
+    const [page, setPage] = useState<SalePage>({
+        first: true,
+        last: true,
+        number: 0,
+        totalElements: 0,
+        totalPages: 0
+    });
+
+    useEffect(() => {
+        axios.get(`${BASE_URL}/sales?page=2&size=15`)
+            .then(response => {
+                setPage(response.data);
+            });
+    });
+
     return (
         <div className="table-responsive">
             <table className="table table-striped table-sm">
@@ -12,31 +34,19 @@ const DataTable = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>27/04/2021</td>
-                        <td>Logan</td>
-                        <td>32</td>
-                        <td>11</td>
-                        <td>8633.00</td>
+                    { page.content?.map(y => (
+                        <tr key={y.id}>
+                        <td>{formatLocalDate(y.date, "dd/MM/yyyy")}</td>
+                        <td>{y.seller.name}</td>
+                        <td>{y.visited}</td>
+                        <td>{y.deals}</td>
+                        <td>{y.amount.toFixed(2)}</td>
                     </tr>
-                    <tr>
-                        <td>01/05/2021</td>
-                        <td>Kaua Celso</td>
-                        <td>26</td>
-                        <td>22</td>
-                        <td>20333.00</td>
-                    </tr>
-                    <tr>
-                        <td>15/04/2021</td>
-                        <td>Monica Lima</td>
-                        <td>30</td>
-                        <td>12</td>
-                        <td>5097.00</td>
-                    </tr>
+                    )) }
                 </tbody>
             </table>
         </div>
-    )
-}
+    );
+};
 
 export default DataTable;
