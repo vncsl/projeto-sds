@@ -22,7 +22,7 @@ const Dashboard = () => {
                 </div>
 
                 <div className="py-3">
-                    <h2 className="text-primary">Vendas</h2>
+                    <h2 className="text-primary">Sale's List</h2>
                 </div>
                 <DataTable />
             </div>
