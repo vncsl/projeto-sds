@@ -12,11 +12,11 @@ const Dashboard = () => {
                 <h1 className="text-primary py-3">Dashboard</h1>
                 <div className="row px-3">
                     <div className="col-sm-6">
-                        <h5 className="text-center text-secondary">% Conversão</h5>
+                        <h5 className="text-center text-secondary">% Success</h5>
                         <BarChart />
                     </div>
                     <div className="col-sm-6">
-                        <h5 className="text-center text-secondary">% Conversão</h5>
+                        <h5 className="text-center text-secondary">All sales</h5>
                         <DonutChart />
                     </div>
                 </div>
